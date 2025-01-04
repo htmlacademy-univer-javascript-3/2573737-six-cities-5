@@ -21,7 +21,7 @@ export const App: React.FC<Props> = ({placesCount, offers}) => (
       <Route path="/" element={<Main placesCount={placesCount} offers={offers}/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/favorites" element={
-        <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+        <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
           <Favorites offers={offers}/>
         </PrivateRoute>
       }
