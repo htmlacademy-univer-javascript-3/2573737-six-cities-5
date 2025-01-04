@@ -10,6 +10,13 @@ export enum AppRoute {
   Main = '/',
   Offer = '/offer/:id',
 }
+export type City = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
+
+export type TypeCity = {
+  title: City;
+  lat: number;
+  lng: number;
+}
 
 export type TypePlaceType = 'Apartment' | 'Room';
 
@@ -24,6 +31,8 @@ export type TypePlacesInfo = {
   rating: number;
   name: string;
   type: TypePlaceType;
+  lat: number;
+  lng: number;
 };
 
 export type TypeReviewInfo = {
