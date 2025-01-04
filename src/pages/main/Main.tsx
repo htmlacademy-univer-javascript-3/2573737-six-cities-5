@@ -1,13 +1,16 @@
 import React from 'react';
-import {TypePlacesInfo} from '../../types/types.ts';
+import {TypeCity, TypePlacesInfo} from '../../types/types.ts';
 import {CardList} from '../../components/cardList/CardList.tsx';
 import {Link} from 'react-router-dom';
+import {Map} from '../../components/map/Map.tsx';
 
 interface Places {
   placesCount: number;
   offers: TypePlacesInfo[];
+  currentCity: TypeCity;
 }
-export const Main: React.FC<Places> = ({placesCount, offers}) => (
+
+export const Main: React.FC<Places> = ({placesCount, offers, currentCity}) => (
 
   <div className="page page--gray page--main">
     <header className="header">
@@ -81,7 +84,7 @@ export const Main: React.FC<Places> = ({placesCount, offers}) => (
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+            <b className="places__found">{placesCount} places to stay in {currentCity.title}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -102,7 +105,9 @@ export const Main: React.FC<Places> = ({placesCount, offers}) => (
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <section className="cities__map map">
+              <Map offers={offers} currentCity={currentCity}/>
+            </section>
           </div>
         </div>
       </div>

@@ -6,19 +6,20 @@ import {Favorites} from '../../pages/favorites/Favorites.tsx';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import PrivateRoute from '../../pages/privateRoute/PrivateRoute.tsx';
 
-import {AuthorizationStatus, TypePlacesInfo} from '../../types/types.ts';
+import {AuthorizationStatus, TypeCity, TypePlacesInfo} from '../../types/types.ts';
 
 interface Props {
   placesCount: number;
   offers: TypePlacesInfo[];
+  currentCity: TypeCity;
 }
 
 // временный костыль. EELint ругается: placesCount и placesInfo is missing in props validation, хотя вот же выше они объявлены
 // eslint-disable-next-line react/prop-types
-export const App: React.FC<Props> = ({placesCount, offers}) => (
+export const App: React.FC<Props> = ({placesCount, offers, currentCity}) => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Main placesCount={placesCount} offers={offers}/>}/>
+      <Route path="/" element={<Main placesCount={placesCount} offers={offers} currentCity={currentCity}/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/favorites" element={
         <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
