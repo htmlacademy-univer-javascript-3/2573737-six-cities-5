@@ -1,20 +1,22 @@
 import React from 'react';
-import {Card, PlacesInfo} from '../../components/card/Card.tsx';
+import {TypePlacesInfo} from '../../types/types.ts';
+import {CardList} from '../../components/cardList/CardList.tsx';
+import {Link} from 'react-router-dom';
 
 interface Places {
   placesCount: number;
-  placesInfo: PlacesInfo[];
+  offers: TypePlacesInfo[];
 }
-export const Main: React.FC<Places> = ({placesCount, placesInfo}) => (
+export const Main: React.FC<Places> = ({placesCount, offers}) => (
 
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a className="header__logo-link header__logo-link--active">
+            <Link className="header__logo-link header__logo-link--active" to="/">
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-            </a>
+            </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
@@ -96,9 +98,7 @@ export const Main: React.FC<Places> = ({placesCount, placesInfo}) => (
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {/*пока что key = href, изначально хотел добаить placeId, но ESLint ругается на то что нигде не используется компоненте Card*/}
-              {/*позже посмотрю что api выдает и решу как поменять*/}
-              {placesInfo.map((place) => (<Card key={place.href} {...place}/>))}
+              <CardList offers={offers}/>
             </div>
           </section>
           <div className="cities__right-section">
