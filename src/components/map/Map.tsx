@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {mapHook} from './MapHook.ts';
+import {useMap} from './UseMap.ts';
 import {TypePlacesInfo, TypeCity} from '../../types/types.ts';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -14,7 +14,7 @@ export const Map: React.FC<MapProps> = ({
   currentCity,
 }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const map = mapHook({mapRef, currentCity});
+  const map = useMap({mapRef, currentCity});
   const defaultCustomIcon = leaflet.icon({
     iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
     iconSize: [40, 40],

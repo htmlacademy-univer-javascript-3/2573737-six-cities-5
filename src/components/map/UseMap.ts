@@ -7,7 +7,7 @@ type useMapProps = {
   currentCity: TypeCity;
 }
 
-export function mapHook({mapRef, currentCity}: useMapProps) {
+export function useMap({mapRef, currentCity}: useMapProps) {
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef(false);
   useEffect(() => {

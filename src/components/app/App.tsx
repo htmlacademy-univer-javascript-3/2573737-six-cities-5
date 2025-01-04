@@ -11,7 +11,7 @@ import {AuthorizationStatus, TypeCity, TypePlacesInfo} from '../../types/types.t
 interface Props {
   placesCount: number;
   offers: TypePlacesInfo[];
-  currentCity: TypeCity
+  currentCity: TypeCity;
 }
 
 // временный костыль. EELint ругается: placesCount и placesInfo is missing in props validation, хотя вот же выше они объявлены
