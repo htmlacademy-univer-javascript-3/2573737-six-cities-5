@@ -32,7 +32,7 @@ export type TypeReviewInfo = {
   placeId: number;
   comment: string;
   rating: number;
-  review_time: string;
+  reviewTime: string;
 }
 
 export type TypeReviewState = {
