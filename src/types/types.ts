@@ -1,3 +1,5 @@
+import {store} from '../store/store.ts';
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -33,6 +35,7 @@ export type TypePlacesInfo = {
   type: TypePlaceType;
   lat: number;
   lng: number;
+  city: City;
 };
 
 export type TypeReviewInfo = {
@@ -48,3 +51,14 @@ export type TypeReviewState = {
   comment: string;
   rating: number;
 };
+
+export type Point = {
+  title: string;
+  lat: number;
+  lng: number;
+  offerId: number;
+}
+
+export type State = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

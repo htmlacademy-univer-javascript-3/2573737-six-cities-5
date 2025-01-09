@@ -1,16 +1,16 @@
 import React, {useEffect, useRef} from 'react';
-import {useMap} from './UseMap.ts';
-import {TypePlacesInfo, TypeCity} from '../../types/types.ts';
+import {useMap} from '../../hooks/UseMap.ts';
+import {TypeCity, Point} from '../../types/types.ts';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
-  offers: TypePlacesInfo[];
+  points: Point[];
   currentCity: TypeCity;
 }
 
 export const Map: React.FC<MapProps> = ({
-  offers,
+  points,
   currentCity,
 }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
@@ -22,18 +22,18 @@ export const Map: React.FC<MapProps> = ({
   });
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
+      points.forEach((point) => {
         leaflet
           .marker({
-            lat: offer.lat,
-            lng: offer.lng,
+            lat: point.lat,
+            lng: point.lng,
           }, {
             icon: defaultCustomIcon,
           })
           .addTo(map);
       });
     }
-  }, [map, offers]);
+  }, [map, points]);
   return (
     <div
       style={{height: '100%'}}

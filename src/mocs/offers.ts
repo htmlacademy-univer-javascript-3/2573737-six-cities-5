@@ -12,6 +12,7 @@ export const offers: TypePlacesInfo[] = [
     type: 'Apartment',
     lat: 52.3909553943508,
     lng: 4.85309666406198,
+    city: 'Amsterdam'
   },
   {
     id:2,
@@ -24,6 +25,7 @@ export const offers: TypePlacesInfo[] = [
     type: 'Room',
     lat:52.3609553943508,
     lng: 4.85309666406198,
+    city: 'Amsterdam'
   },
   {
     id:3,
@@ -35,6 +37,7 @@ export const offers: TypePlacesInfo[] = [
     type: 'Apartment',
     lat: 52.3909553943508,
     lng: 4.929309666406198,
+    city: 'Amsterdam'
   },
   {
     id:4,
@@ -46,7 +49,8 @@ export const offers: TypePlacesInfo[] = [
     name: 'Nice, cozy, warm big bed apartment',
     type: 'Apartment',
     lat: 52.3809553943508,
-    lng: 4.939309666406198
+    lng: 4.939309666406198,
+    city: 'Amsterdam'
   },
   {
     id:5,
@@ -58,6 +62,7 @@ export const offers: TypePlacesInfo[] = [
     name: 'Wood and stone place',
     type: 'Room',
     lat: 52.3209553943508,
-    lng: 4.939309666406198
+    lng: 4.939309666406198,
+    city: 'Amsterdam'
   },
 ];
