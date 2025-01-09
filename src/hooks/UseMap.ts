@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, MutableRefObject } from 'react';
-import {TypeCity} from '../../types/types.ts';
+import {TypeCity} from '../types/types.ts';
 import leaflet from 'leaflet';
 
 type useMapProps = {
