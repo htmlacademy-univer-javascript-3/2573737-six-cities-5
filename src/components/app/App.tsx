@@ -6,12 +6,12 @@ import {Favorites} from '../../pages/favorites/Favorites.tsx';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import PrivateRoute from '../../pages/privateRoute/PrivateRoute.tsx';
 import {AuthorizationStatus} from '../../types/types.ts';
-import {useAppSelector} from '../../hooks/hooks.ts';
+import {useAppSelector, useInitApp} from '../../hooks/hooks.ts';
 import React from 'react';
 
 export const App: React.FC = () => {
+  useInitApp();
   const offers = useAppSelector((state) => state.offers);
-
   return (
     <BrowserRouter>
       <Routes>
