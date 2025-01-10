@@ -9,20 +9,20 @@ export const Locations = () => {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {Object.entries(cityList).map(([cityName, cityObj]) => (
-            <li className="locations__item" key={cityName}>
+          {Object.entries(cityList).map(([cityId, cityObj]) => (
+            <li className="locations__item" key={cityId}>
               {
-                cityObj.title === currentCity.title ?
+                cityObj.name === currentCity.name ?
                   <a className="locations__item-link tabs__item tabs__item--active"
                     onClick={() => dispatch(setCity(cityObj))}
                   >
-                    <span>{cityObj.title}</span>
+                    <span>{cityObj.name}</span>
                   </a>
                   :
                   <a className="locations__item-link tabs__item"
                     onClick={() => dispatch(setCity(cityObj))}
                   >
-                    <span>{cityObj.title}</span>
+                    <span>{cityObj.name}</span>
                   </a>
               }
             </li>

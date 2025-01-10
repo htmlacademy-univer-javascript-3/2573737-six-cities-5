@@ -33,7 +33,7 @@ export const Card: React.FC<placeProps> = ({place}) => {
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button
-              className={`place-card__bookmark-button ${place.isBookmarked ? 'place-card__bookmark-button--active' : ''} button`}
+              className={`place-card__bookmark-button ${place.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
               type="button"
             >
               <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -50,7 +50,7 @@ export const Card: React.FC<placeProps> = ({place}) => {
           </div>
           <h2 className="place-card__name">
             {/*<Link to='/offer/:id'>*/}
-            {place.name}
+            {place.title}
             {/*</Link>*/}
           </h2>
           <p className="place-card__type">{place.type}</p>

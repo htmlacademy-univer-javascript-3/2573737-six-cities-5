@@ -14,17 +14,17 @@ export function useMap({mapRef, currentCity}: useMapProps) {
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = leaflet.map(mapRef.current, {
         center: {
-          lat: currentCity.lat,
-          lng: currentCity.lng,
+          lat: currentCity.location.latitude,
+          lng: currentCity.location.longitude,
         },
-        zoom: 12,
+        zoom: currentCity.location.zoom,
       });
 
       leaflet
         .tileLayer(
           'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
           {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            attribution: '&copy',
           },
         )
         .addTo(instance);

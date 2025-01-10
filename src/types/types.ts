@@ -15,27 +15,29 @@ export enum AppRoute {
 export type City = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
 
 export type TypeCity = {
-  title: City;
-  lat: number;
-  lng: number;
+  name: City;
+  location: TypePlacesLocation;
 }
+
+export type TypePlacesLocation = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+};
 
 export type TypePlaceType = 'Apartment' | 'Room';
 
 export type TypePlacesInfo = {
-  id: number;
-  isPremium?: boolean;
-  href: string;
-  image: string;
-  imageAlt?: string;
+  id: string;
+  city: TypeCity;
+  isFavorite: boolean;
+  isPremium: false;
+  location: TypePlacesLocation;
+  previewImage: string;
   price: number;
-  isBookmarked?: boolean;
   rating: number;
-  name: string;
-  type: TypePlaceType;
-  lat: number;
-  lng: number;
-  city: City;
+  title: string;
+  type: 'string';
 };
 
 export type TypeReviewInfo = {

@@ -2,33 +2,51 @@ import {TypeCity} from '../types/types.ts';
 
 export const city: TypeCity[] = [
   {
-    title: 'Paris',
-    lng: 2.348,
-    lat: 48.853
+    name: 'Paris',
+    location: {
+      latitude: 48.85661,
+      longitude: 2.351499,
+      zoom: 13
+    }
   },
   {
-    title: 'Cologne',
-    lng: 6.95,
-    lat: 50.933
+    name: 'Cologne',
+    location: {
+      latitude: 50.938361,
+      longitude: 6.959974,
+      zoom: 13
+    }
   },
   {
-    title: 'Brussels',
-    lng: 4.348,
-    lat: 50.85
+    name: 'Brussels',
+    location: {
+      latitude: 50.846557,
+      longitude: 4.351697,
+      zoom: 13
+    }
   },
   {
-    title: 'Amsterdam',
-    lng: 4.889,
-    lat: 52.374
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.37454,
+      longitude: 4.897976,
+      zoom: 13
+    }
   },
   {
-    title: 'Hamburg',
-    lng: 10.015,
-    lat: 53.575
+    name: 'Hamburg',
+    location: {
+      latitude: 53.550341,
+      longitude: 10.000654,
+      zoom: 13
+    }
   },
   {
-    title: 'Dusseldorf',
-    lng: 6.776,
-    lat: 51.221
+    name: 'Dusseldorf',
+    location: {
+      latitude: 51.225402,
+      longitude: 6.776314,
+      zoom: 13
+    }
   },
 ];
