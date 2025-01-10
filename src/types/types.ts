@@ -54,13 +54,6 @@ export type TypeReviewState = {
   rating: number;
 };
 
-export type Point = {
-  title: string;
-  lat: number;
-  lng: number;
-  offerId: number;
-}
-
 export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
