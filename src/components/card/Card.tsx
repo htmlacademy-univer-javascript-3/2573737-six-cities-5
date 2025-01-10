@@ -14,7 +14,7 @@ export const Card: React.FC<placeProps> = ({place}) => {
     <article className="cities__card place-card" onMouseOver={() =>
       setActiveCard(!isActiveCard)}
     >
-      <Link to='/offer/:id'>
+      <Link to={{ pathname: `/offer/${place.id}`}}>
 
         {place.isPremium && (
           <div className="place-card__mark">
@@ -22,9 +22,9 @@ export const Card: React.FC<placeProps> = ({place}) => {
           </div>
         )}
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href={place.href}>
-            <img className="place-card__image" src={place.image} width="260" height="200" alt={place.imageAlt}/>
-          </a>
+          <Link to={{ pathname: `/offer/${place.id}`}}>
+            <img className="place-card__image" src={place.previewImage} width="260" height="200" alt={place.title}/>
+          </Link>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">

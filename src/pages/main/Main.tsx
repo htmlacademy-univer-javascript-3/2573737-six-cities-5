@@ -12,8 +12,10 @@ import Spinner from '../../components/spinner/Spinner.tsx';
 export const Main: React.FC = () => {
   const currentCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
-  const placesCount = getCityOffersCount(currentCity.title);
   const dispatch = useAppDispatch();
+  const loading = useAppSelector((state) => state.offersLoading);
+  const cityOffers = offers.filter((offer: TypePlacesInfo) => offer?.city?.name === currentCity.name);
+  const [offerCount, setOfferCount] = useState<number>();
 
   useEffect(() => {
     if (!loading) {
