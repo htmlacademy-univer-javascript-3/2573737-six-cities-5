@@ -4,11 +4,9 @@ import {Header} from '../../components/header/Header.tsx';
 import {Map} from '../../components/map/Map.tsx';
 import {Locations} from '../../components/cities/Cities.tsx';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks.ts';
-import getCityOffersCount from '../../utils/getCityOffersCount.ts';
-import {setOffers} from '../../store/action.ts';
-import getCityOffers from '../../utils/getCityOffers.ts';
-import {Point} from '../../types/types.ts';
-import getPoints from '../../utils/getPoints.ts';
+import { setOffersByCity} from '../../store/action.ts';
+import { TypePlacesInfo} from '../../types/types.ts';
+import Spinner from '../../components/spinner/Spinner.tsx';
 
 
 export const Main: React.FC = () => {
