@@ -14,7 +14,7 @@ export const Card: React.FC<placeProps> = ({place}) => {
     <article className="cities__card place-card" onMouseOver={() =>
       setActiveCard(!isActiveCard)}
     >
-      <Link to='/offer/:id'>
+      <Link to={{ pathname: `/offer/${place.id}`}}>
 
         {place.isPremium && (
           <div className="place-card__mark">
@@ -22,9 +22,9 @@ export const Card: React.FC<placeProps> = ({place}) => {
           </div>
         )}
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href={place.href}>
-            <img className="place-card__image" src={place.image} width="260" height="200" alt={place.imageAlt}/>
-          </a>
+          <Link to={{ pathname: `/offer/${place.id}`}}>
+            <img className="place-card__image" src={place.previewImage} width="260" height="200" alt={place.title}/>
+          </Link>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
@@ -33,7 +33,7 @@ export const Card: React.FC<placeProps> = ({place}) => {
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button
-              className={`place-card__bookmark-button ${place.isBookmarked ? 'place-card__bookmark-button--active' : ''} button`}
+              className={`place-card__bookmark-button ${place.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
               type="button"
             >
               <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -50,7 +50,7 @@ export const Card: React.FC<placeProps> = ({place}) => {
           </div>
           <h2 className="place-card__name">
             {/*<Link to='/offer/:id'>*/}
-            {place.name}
+            {place.title}
             {/*</Link>*/}
           </h2>
           <p className="place-card__type">{place.type}</p>
