@@ -1,5 +1,3 @@
-// @ts-ignore
-
 import {city} from '../mocs/city.ts';
 import {TypePlacesInfo, TypeCity, AuthorizationStatus, UserData} from '../types/types.ts';
 import { createReducer } from '@reduxjs/toolkit';
