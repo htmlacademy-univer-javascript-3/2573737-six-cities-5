@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import {useMap} from '../../hooks/UseMap.ts';
-import {TypeCity,  TypePlacesInfo} from '../../types/types.ts';
+import {TypeCity, TypePlacesInfo} from '../../types/types.ts';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -13,6 +13,7 @@ export const Map: React.FC<MapProps> = ({
   offers,
   currentCity,
 }) => {
+
   const mapRef = useRef<HTMLDivElement | null>(null);
   const map = useMap({mapRef, currentCity});
   const defaultCustomIcon = leaflet.icon({

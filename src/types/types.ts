@@ -12,6 +12,7 @@ export enum AppRoute {
   Main = '/',
   Offer = '/offer/:id',
 }
+
 export type City = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
 
 export type TypeCity = {
@@ -37,22 +38,55 @@ export type TypePlacesInfo = {
   price: number;
   rating: number;
   title: string;
-  type: 'string';
+  // type: 'string';
+  type: TypePlaceType;
 };
+
+export type TypeOfferData = {
+  id: string;
+  city: TypeCity;
+  isFavorite: boolean;
+  isPremium: false;
+  location: TypePlacesLocation;
+  previewImage: string;
+  price: number;
+  rating: number;
+  title: string;
+  // type: 'string';
+  type: TypePlaceType;
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: TypeHostInfo;
+  images: string[];
+  maxAdults: number;
+};
+
+export type TypeHostInfo = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
 
 export type TypeReviewInfo = {
   id: number;
-  userId: number;
-  placeId: number;
+  date: string;
+  user: UserViewInfo;
+  // placeId: number;
   comment: string;
   rating: number;
-  reviewTime: string;
 }
 
 export type TypeReviewState = {
   comment: string;
   rating: number;
 };
+
+export type UserViewInfo = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
 
 export type State = ReturnType<typeof store.getState>;
 
