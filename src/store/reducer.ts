@@ -1,7 +1,17 @@
+// @ts-ignore
+
 import {city} from '../mocs/city.ts';
-import {TypePlacesInfo, TypeCity} from '../types/types.ts';
+import {TypePlacesInfo, TypeCity, AuthorizationStatus, UserData} from '../types/types.ts';
 import { createReducer } from '@reduxjs/toolkit';
-import {setCity, setError, setOffers, setOffersByCity, setOffersLoading} from './action.ts';
+import {
+  setAuthorization,
+  setCity,
+  setError,
+  setOffers,
+  setOffersByCity,
+  setOffersLoading,
+  setUserData
+} from './action.ts';
 
 
 type InitialState = {
@@ -11,6 +21,8 @@ type InitialState = {
   offersByCity: TypePlacesInfo[];
   offersLoading: boolean;
   error: string | null;
+  authorizationStatus: AuthorizationStatus;
+  userData: UserData | null;
 };
 
 const defaultCity: TypeCity = {
@@ -29,6 +41,8 @@ const initialState: InitialState = {
   offersByCity: [],
   offersLoading: false,
   error: null,
+  authorizationStatus: AuthorizationStatus.UnKnown,
+  userData: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -47,5 +61,15 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(setAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserData, (state, action) => {
+      if (action.payload) {
+        state.userData = action.payload;
+      } else {
+        state.userData = null;
+      }
     });
 });
