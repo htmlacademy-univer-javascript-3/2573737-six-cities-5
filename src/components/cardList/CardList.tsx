@@ -4,10 +4,12 @@ import {Card} from '../card/Card.tsx';
 
 type ListOffersProps = {
   offers: TypePlacesInfo[];
+  setActiveOffer?: (id: string | null) => void;
 }
 
 export const CardList: React.FC<ListOffersProps> = ({
-  offers
+  offers,
+  setActiveOffer
 }) => (
-  offers.map((offer: TypePlacesInfo) => (<Card key={offer.id} place={offer}/>))
+  offers.map((offer: TypePlacesInfo) => (<Card key={offer.id} place={offer} {...(setActiveOffer && {setActiveOffer})}/>))
 );
