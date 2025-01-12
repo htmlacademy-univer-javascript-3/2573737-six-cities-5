@@ -37,7 +37,7 @@ export const Main: React.FC = () => {
         <Locations/>
 
         {loading ? (
-          <Spinner />
+          <Spinner/>
         ) : (
           <div className="cities">
             <div className="cities__places-container container">
