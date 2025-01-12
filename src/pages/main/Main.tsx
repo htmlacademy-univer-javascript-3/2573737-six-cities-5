@@ -4,9 +4,11 @@ import {Header} from '../../components/header/Header.tsx';
 import {Map} from '../../components/map/Map.tsx';
 import {Locations} from '../../components/cities/Cities.tsx';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks.ts';
-import { setOffersByCity} from '../../store/action.ts';
-import { TypePlacesInfo} from '../../types/types.ts';
+import {setOffersByCity} from '../../store/action.ts';
+import {TypeSortFilters} from '../../types/types.ts';
 import Spinner from '../../components/spinner/Spinner.tsx';
+import {PlacesSorting} from '../../components/placesSorting/placesSorting.tsx';
+import useFilter from '../../hooks/useFilter.ts';
 
 
 export const Main: React.FC = () => {
