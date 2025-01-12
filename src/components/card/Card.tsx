@@ -5,14 +5,17 @@ import {Link} from 'react-router-dom';
 
 type placeProps = {
   place: TypePlacesInfo;
+  setActiveOffer?: (id: string | null) => void;
 };
 
-export const Card: React.FC<placeProps> = ({place}) => {
+export const Card: React.FC<placeProps> = ({place, setActiveOffer,}) => {
   const [isActiveCard, setActiveCard] = useState(false);
 
   return (
-    <article className="cities__card place-card" onMouseOver={() =>
-      setActiveCard(!isActiveCard)}
+    <article className="cities__card place-card"
+      onMouseEnter={() => setActiveOffer && setActiveOffer(place.id)}
+      onMouseLeave={() => setActiveOffer && setActiveOffer(null)}
+      onMouseOver={() => setActiveCard(!isActiveCard)}
     >
       <Link to={{ pathname: `/offer/${place.id}`}}>
 

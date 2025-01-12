@@ -19,6 +19,8 @@ export const Main: React.FC = () => {
   const [sort, setSort] = useState<TypeSortFilters>(TypeSortFilters.POPULAR);
   const cityOffers = useFilter({offers, currentCity, sort});
   const [offerCount, setOfferCount] = useState<number>();
+  const [activeOffer, setActiveOffer] = useState<string | null>(null);
+
   const handleSortChange = (newSortType: TypeSortFilters) => {
     setSort(newSortType);
   };
@@ -46,13 +48,13 @@ export const Main: React.FC = () => {
                 <b className="places__found">{offerCount} places to stay in {currentCity.name}</b>
                 <PlacesSorting initialSort={sort} onChange={handleSortChange}/>
                 <div className="cities__places-list places__list tabs__content">
-                  <CardList offers={cityOffers}/>
+                  <CardList offers={cityOffers} setActiveOffer={setActiveOffer}/>
                 </div>
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
                   {/*TODO перерисовка карты (зум CurrentCity, перерисовка поинтов)*/}
-                  <Map offers={cityOffers} currentCity={currentCity}/>
+                  <Map offers={cityOffers} currentCity={currentCity} activeOffer={activeOffer}/>
                 </section>
               </div>
             </div>
