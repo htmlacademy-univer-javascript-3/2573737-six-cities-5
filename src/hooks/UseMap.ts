@@ -10,6 +10,7 @@ type useMapProps = {
 export function useMap({mapRef, currentCity}: useMapProps) {
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef(false);
+
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = leaflet.map(mapRef.current, {
@@ -20,17 +21,16 @@ export function useMap({mapRef, currentCity}: useMapProps) {
         zoom: currentCity.location.zoom,
       });
 
-      leaflet
-        .tileLayer(
-          'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-          {
-            attribution: '&copy',
-          },
-        )
-        .addTo(instance);
+      leaflet.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '©'
+      }).addTo(instance);
 
       setMap(instance);
       isRenderedRef.current = true;
+    }
+
+    if (map && currentCity) {
+      map.setView([currentCity.location.latitude, currentCity.location.longitude], currentCity.location.zoom);
     }
   }, [mapRef, currentCity]);
 

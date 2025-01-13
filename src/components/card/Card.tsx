@@ -1,7 +1,10 @@
-import React from 'react';
-import {TypePlacesInfo} from '../../types/types.ts';
+import React, {useCallback} from 'react';
+import {AppRoute, TypePlacesInfo} from '../../types/types.ts';
 import { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import BookmarkButton from '../bookmark/Bookmark.tsx';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks.ts';
+import {postFavoriteOffers} from '../../store/apiActions.ts';
 
 type placeProps = {
   place: TypePlacesInfo;
@@ -10,6 +13,22 @@ type placeProps = {
 
 export const Card: React.FC<placeProps> = ({place, setActiveOffer,}) => {
   const [isActiveCard, setActiveCard] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigateTo = useNavigate();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  // const [status, setStatus] = useState();
+  const handleToggleFavoriteStatus = useCallback(() => {
+    if (authorizationStatus) {
+      dispatch(
+        postFavoriteOffers({
+          offerId: place.id,
+          status: place.isFavorite ? 0 : 1,
+        })
+      );
+    } else {
+      navigateTo(AppRoute.Login);
+    }
+  }, [dispatch, navigateTo, place]);
 
   return (
     <article className="cities__card place-card"
@@ -35,15 +54,8 @@ export const Card: React.FC<placeProps> = ({place, setActiveOffer,}) => {
               <b className="place-card__price-value">&euro;{place.price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button
-              className={`place-card__bookmark-button ${place.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
-              type="button"
-            >
-              <svg className="place-card__bookmark-icon" width="18" height="19">
-                <use xlinkHref="#icon-bookmark"/>
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+
+            <BookmarkButton isFavorite={place.isFavorite} handleToggleFavoriteStatus={handleToggleFavoriteStatus}/>
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
@@ -52,9 +64,7 @@ export const Card: React.FC<placeProps> = ({place, setActiveOffer,}) => {
             </div>
           </div>
           <h2 className="place-card__name">
-            {/*<Link to='/offer/:id'>*/}
             {place.title}
-            {/*</Link>*/}
           </h2>
           <p className="place-card__type">{place.type}</p>
         </div>

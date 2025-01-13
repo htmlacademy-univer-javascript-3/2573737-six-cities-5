@@ -113,3 +113,8 @@ export const enum TypeSortFilters {
   HIGH_TO_LOW = 'Price: high to low',
   TOP_RATED = 'Top rated first',
 }
+
+export type TypeFavorite = {
+  offerId: string;
+  status: number;
+}

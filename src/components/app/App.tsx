@@ -10,7 +10,6 @@ import React from 'react';
 
 export const App: React.FC = () => {
   useInitApp();
-  const offers = useAppSelector((state) => state.offers);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   return (
     <BrowserRouter>
@@ -20,7 +19,7 @@ export const App: React.FC = () => {
         <Route path="/favorites" element={
           <PrivateRoute authorizationStatus={authorizationStatus}>
             {/*TODO grid/flex отображение*/}
-            <Favorites offers={offers}/>
+            <Favorites/>
           </PrivateRoute>
         }
         />

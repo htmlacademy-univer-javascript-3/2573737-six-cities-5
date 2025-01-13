@@ -1,5 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {
+  getFavoriteOffers,
   setAuthorization,
   setComments,
   setNearbyOffers,
@@ -13,7 +14,7 @@ import {
   AppRoute,
   AuthData,
   AuthorizationStatus,
-  State,
+  State, TypeFavorite,
   TypeOfferData,
   TypePlacesInfo, TypeReviewFormData, TypeReviewInfo,
   UserData
@@ -135,4 +136,31 @@ export const postComment = createAsyncThunk<void, TypeReviewFormData, {
     await api.post<TypeReviewFormData>(`${API_ROUTES.COMMENTS.POST.replace('{offerId}', id)}`, {comment, rating});
     dispatch(fetchComments(id));
   },
+);
+export const fetchFavoriteOffers = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'FAV_FETCH',
+  async (_arg, {dispatch, extra: api}) => {
+    // eslint-disable-next-line no-console
+    console.log('fav offer');
+    dispatch(setOffersLoading(true));// eslint-disable-next-line no-console
+    const {data} = await api.get<TypePlacesInfo[]>(API_ROUTES.FAVORITE.GET);
+    dispatch(setOffersLoading(false));
+    dispatch(getFavoriteOffers(data));
+  }
+);
+export const postFavoriteOffers = createAsyncThunk<void, TypeFavorite, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'FAV_POST',
+  async ({offerId, status}, {dispatch, extra: api}) => {
+    const url = API_ROUTES.FAVORITE.SET.replace(/\{offerId\}/g, String(offerId)).replace(/\{status\}/g, String(status));
+    await api.post(url);
+    dispatch(fetchFavoriteOffers);
+  }
 );

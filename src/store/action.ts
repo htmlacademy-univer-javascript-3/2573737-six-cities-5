@@ -1,7 +1,7 @@
 import {createAction} from '@reduxjs/toolkit';
 import {
   AuthorizationStatus,
-  TypeCity,
+  TypeCity, TypeFavorite,
   TypeOfferData,
   TypePlacesInfo,
   TypeReviewInfo,
@@ -19,3 +19,5 @@ export const setUserData = createAction<UserData>('SET_USER_DATA');
 export const setOfferById = createAction <TypeOfferData>('SET_OFFER_BY_ID');
 export const setComments = createAction<TypeReviewInfo[]>('SET_COMMENTS');
 export const setNearbyOffers = createAction <TypePlacesInfo[]>('SET_NEARBY_OFFERS');
+export const getFavoriteOffers = createAction <TypePlacesInfo[]>('GET_FAVORITE_OFFERS');
+export const setFavorite = createAction <TypeFavorite>('SET_FAVORITE_OFFERS');

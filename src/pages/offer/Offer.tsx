@@ -1,19 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ReviewForm} from '../../components/review/ReviewForm.tsx';
 import {Header} from '../../components/header/Header.tsx';
 import ReviewList from '../../components/review/ReviewsList.tsx';
-import {Navigate, useParams} from 'react-router-dom';
+import {Navigate, useNavigate, useParams} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks.ts';
-import {fetchComments, fetchNearby, fetchOfferById} from '../../store/apiActions.ts';
+import {fetchComments, fetchNearby, fetchOfferById, postFavoriteOffers} from '../../store/apiActions.ts';
 import {Map} from '../../components/map/Map.tsx';
 import {Card} from '../../components/card/Card.tsx';
 import Spinner from '../../components/spinner/Spinner.tsx';
-import {AuthorizationStatus} from '../../types/types.ts';
+import {AppRoute, AuthorizationStatus} from '../../types/types.ts';
+import BookmarkButton from '../../components/bookmark/Bookmark.tsx';
 
 export const Offer: React.FC = () => {
   const params = useParams<{ id: string }>();
   const offerId = params.id ?? 'default-offer-id';
   const dispatch = useAppDispatch();
+  const navigateTo = useNavigate();
   const offer = useAppSelector((state) => state.offerById);
   const reviews = useAppSelector((state) => state.reviews);
   const nearby = useAppSelector((state) => state.nearbyOffers);
@@ -27,6 +29,19 @@ export const Offer: React.FC = () => {
     dispatch(fetchComments(offerId));
     dispatch(fetchNearby(offerId));
   }, [dispatch]);
+
+  const handleToggleFavoriteStatus = useCallback(() => {
+    if (authorizationStatus) {
+      dispatch(
+        postFavoriteOffers({
+          offerId: offer.id,
+          status: offer.isFavorite ? 0 : 1,
+        })
+      );
+    } else {
+      navigateTo(AppRoute.Login);
+    }
+  }, [dispatch, navigateTo, offer]);
 
   if (error) {
     return <Navigate to={'/404'} />;
@@ -62,17 +77,7 @@ export const Offer: React.FC = () => {
                   <h1 className="offer__name">
                     {offer.title}
                   </h1>
-                  <button className="offer__bookmark-button button" type="button">
-                    <svg className="offer__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    {
-                      offer.isFavorite ?
-                        <span className="visually-hidden">To bookmarks</span>
-                        :
-                        null
-                    }
-                  </button>
+                  <BookmarkButton isFavorite={offer.isFavorite} handleToggleFavoriteStatus={handleToggleFavoriteStatus}/>
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
@@ -152,8 +157,6 @@ export const Offer: React.FC = () => {
               </div>
             </div>
             <section className="offer__map map">
-              {/*TODO та же проблема с перерисовкой. в этот раз сюда не успевают передаться сити лок до рендера*/}
-              {/*перерисовывает, но не всегда*/}
               <Map currentCity={offer.city} offers={nearby} activeOffer={activeOffer}/>
             </section>
           </section>

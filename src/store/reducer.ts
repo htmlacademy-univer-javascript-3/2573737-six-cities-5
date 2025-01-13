@@ -9,6 +9,7 @@ import {
 } from '../types/types.ts';
 import {createReducer} from '@reduxjs/toolkit';
 import {
+  getFavoriteOffers,
   setAuthorization,
   setCity, setComments,
   setError, setNearbyOffers, setOfferById,
@@ -30,6 +31,7 @@ type InitialState = {
   userData: UserData | null;
   reviews: TypeReviewInfo[];
   nearbyOffers: TypePlacesInfo[];
+  favoriteOffers: TypePlacesInfo[];
 };
 
 const defaultCity: TypeCity = {
@@ -86,7 +88,8 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.UnKnown,
   userData: null,
   reviews: [],
-  nearbyOffers: []
+  nearbyOffers: [],
+  favoriteOffers: []
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -124,5 +127,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setComments, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(getFavoriteOffers, (state, action) => {
+      state.favoriteOffers = action.payload;
     });
 });

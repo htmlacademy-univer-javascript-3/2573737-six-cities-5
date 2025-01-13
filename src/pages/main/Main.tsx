@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {CardList} from '../../components/cardList/CardList.tsx';
 import {Header} from '../../components/header/Header.tsx';
 import {Map} from '../../components/map/Map.tsx';
@@ -12,12 +12,17 @@ import useFilter from '../../hooks/useFilter.ts';
 
 
 export const Main: React.FC = () => {
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const offers = useAppSelector((state) => state.offers);
+  const curCity = useAppSelector((state) => state.currentCity);
+  const currentCity = useMemo(() => curCity, [curCity]);
+  const offersList = useAppSelector((state) => state.offers);
+  const offers = useMemo(() => offersList, [offersList]);
+
   const dispatch = useAppDispatch();
   const loading = useAppSelector((state) => state.offersLoading);
   const [sort, setSort] = useState<TypeSortFilters>(TypeSortFilters.POPULAR);
-  const cityOffers = useFilter({offers, currentCity, sort});
+  const cityOffersFiltered = useFilter({offers, currentCity, sort});
+  const cityOffers = useMemo(() => cityOffersFiltered, [cityOffersFiltered]);
+
   const [offerCount, setOfferCount] = useState<number>();
   const [activeOffer, setActiveOffer] = useState<string | null>(null);
 
@@ -53,7 +58,6 @@ export const Main: React.FC = () => {
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  {/*TODO перерисовка карты (зум CurrentCity, перерисовка поинтов)*/}
                   <Map offers={cityOffers} currentCity={currentCity} activeOffer={activeOffer}/>
                 </section>
               </div>
