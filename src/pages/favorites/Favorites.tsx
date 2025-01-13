@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {FavoriteCardList} from '../../components/cardList/FavoriteCardList.tsx';
 import {TypePlacesInfo} from '../../types/types.ts';
 import {Header} from '../../components/header/Header.tsx';
+import {CardList} from '../../components/cardList/CardList.tsx';
 
 interface FavPlaces {
   offers: TypePlacesInfo[];
@@ -18,7 +18,7 @@ export const Favorites: React.FC<FavPlaces> = ({offers}) => (
           <h1 className="favorites__title">Saved listing</h1>
           <ul className="favorites__list">
             {/* todo свериться со стилями в оригинале, пересмотреть их и использование ul*/}
-            <FavoriteCardList offers={offers}/>
+            <CardList offers={offers}/>
           </ul>
         </section>
       </div>
