@@ -69,15 +69,15 @@ export type TypeHostInfo = {
 }
 
 export type TypeReviewInfo = {
-  id: number;
-  date: string;
+  id: string;
   user: UserViewInfo;
-  // placeId: number;
-  comment: string;
   rating: number;
+  comment: string;
+  date: string;
 }
 
-export type TypeReviewState = {
+export type TypeReviewFormData = {
+  id: string;
   comment: string;
   rating: number;
 };

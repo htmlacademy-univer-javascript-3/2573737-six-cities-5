@@ -15,7 +15,7 @@ import {
   AuthorizationStatus,
   State,
   TypeOfferData,
-  TypePlacesInfo, TypeReviewInfo,
+  TypePlacesInfo, TypeReviewFormData, TypeReviewInfo,
   UserData
 } from '../types/types.ts';
 import {AxiosInstance} from 'axios';
@@ -123,4 +123,16 @@ export const fetchNearby = createAsyncThunk<void, string, {
     dispatch(setOffersLoading(false));
     dispatch(setNearbyOffers(data));
   }
+);
+
+export const postComment = createAsyncThunk<void, TypeReviewFormData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'POST_REVIEW',
+  async ({id, comment, rating}, {dispatch, extra: api}) => {
+    await api.post<TypeReviewFormData>(`${API_ROUTES.COMMENTS.POST.replace('{offerId}', id)}`, {comment, rating});
+    dispatch(fetchComments(id));
+  },
 );

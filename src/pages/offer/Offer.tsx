@@ -2,12 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {ReviewForm} from '../../components/review/ReviewForm.tsx';
 import {Header} from '../../components/header/Header.tsx';
 import ReviewList from '../../components/review/ReviewsList.tsx';
-import {useParams} from 'react-router-dom';
+import {Navigate, useParams} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks.ts';
 import {fetchComments, fetchNearby, fetchOfferById} from '../../store/apiActions.ts';
 import {Map} from '../../components/map/Map.tsx';
 import {Card} from '../../components/card/Card.tsx';
 import Spinner from '../../components/spinner/Spinner.tsx';
+import {AuthorizationStatus} from '../../types/types.ts';
 
 export const Offer: React.FC = () => {
   const params = useParams<{ id: string }>();
@@ -19,11 +20,17 @@ export const Offer: React.FC = () => {
   const loading = useAppSelector((state) => state.offersLoading);
   const [activeOffer, setActiveOffer] = useState<string | null>(null);
 
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const error = useAppSelector((state) => state.error);
   useEffect(() => {
     dispatch(fetchOfferById(offerId));
     dispatch(fetchComments(offerId));
     dispatch(fetchNearby(offerId));
   }, [dispatch]);
+
+  if (error) {
+    return <Navigate to={'/404'} />;
+  }
   return (
     <div className="page">
       <Header isMainPage={false}/>
@@ -133,9 +140,14 @@ export const Offer: React.FC = () => {
                   </div>
                 </div>
                 <section className="offer__reviews reviews">
-                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   <ReviewList reviews={reviews}/>
-                  <ReviewForm/>
+                  {
+                    authorizationStatus === AuthorizationStatus.Auth ?
+                      <ReviewForm offerId = {offer.id}/>
+                      :
+                      null
+                  }
                 </section>
               </div>
             </div>
