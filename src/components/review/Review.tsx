@@ -22,9 +22,11 @@ export const Review: React.FC<ReviewProps> = ({ review, }) => (
     <div className="reviews__info">
 
       <p className="reviews__text">{review.comment}</p>
-      <time className="reviews__time" dateTime={review.date}>
-        {/*TODO сделать парсер даты в читабельное*/}
-        {review.date}
+      <time className="reviews__time" dateTime='2024-09-30'>
+        {new Date(review.date).toLocaleDateString('en-EN', {
+          year: 'numeric',
+          month: 'long',
+        })}
       </time>
     </div>
   </li>
