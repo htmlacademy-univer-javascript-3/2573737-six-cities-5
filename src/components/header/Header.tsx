@@ -12,6 +12,8 @@ export const Header: React.FC<HeaderProps> = ({isMainPage}) => {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const userEmail = useAppSelector((state) => state.userData?.email);
   const dispatch = useAppDispatch();
+  // todo перерисовка fav
+  const favorite = useAppSelector((state) => state.favoriteOffers);
   const handleClick = (evt: SyntheticEvent) => {
     evt.preventDefault();
     dispatch(logoutAction());
@@ -40,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({isMainPage}) => {
                       <Link className="header__nav-link header__nav-link--profile" to="/favorites">
                         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                         <span className="header__user-name user__name">{userEmail}</span>
-                        <span className="header__favorite-count">3</span>
+                        <span className="header__favorite-count">{favorite.length}</span>
                       </Link>
                     </li>
                     <li className="header__nav-item">
